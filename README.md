@@ -3,6 +3,8 @@ runJsInGoogleSite
 
 Move freely javascript in google site
 
+# googleサイト上で好き勝手にjavascriptを動かす方法
+
 ## はじめに
 
 googleサイト上で色々見た目をリッチ化したい、というミッションがあり、結構大変だったので
@@ -117,5 +119,8 @@ GASのHTMLServiceを使っても色々できるようですが、Google Caja内�
 ## 参考サイト
 <a name="section1">  
 [2011-02-22 - sho235711](http://d.hatena.ne.jp/sho235711/20110222)
+
 [×4 new B's: プログラムはじめてみました Google sitesでjQuery/JavaScriptを使う](http://5garashi.blog.fc2.com/blog-entry-23.html)
+
 [HTMLやCSSでのプロトコル表記（http:、https:）の省略について: 小粋空間](http://www.koikikukan.com/archives/2012/05/11-012345.php)
+
