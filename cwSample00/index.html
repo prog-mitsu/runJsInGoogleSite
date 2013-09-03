@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ja"> 
+<head>
+<meta charset="UTF-8" />
+<title>OECD mobile</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0rc1/jquery.mobile-1.0rc1.min.css" />
+<link rel="stylesheet" href="style.css" />
+<script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+<script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+
+
+<!-- Google JSAPIをロード -->
+<script src="https://www.google.com/jsapi"></script>
+ 
+<script>
+    // グラフ生成に必要なパッケージを読み込み
+    google.load('visualization', '1.0', {'packages':['corechart']});
+ 
+    // グラフ描画のためのコールバック関数をセット
+    google.setOnLoadCallback(drawChart);
+ 
+    function drawChart() {
+        // データを用意
+        // データテーブルという表のようなデータ構造
+        
+        
+        var data = google.visualization.arrayToDataTable([
+            ["Year", "Australia","Austria","Belgium","Canada","Chile","Czech Republic","Denmark","Estonia","Finland","France","Germany"],
+            ["2007",21015,8301,10626,32930,16598,10334,5461,1342,5289,61965,82266],
+            ["2008",21499,8337,10710,33316,16763,10424,5494,1341,5313,62300,82110],
+            ["2009",21955,8365,10796,33720,16929,10487,5523,1340,5339,62628,81902],
+            ["2010",22298,8390,10896,34109,17094,10520,5548,1340,5363,62959,81777],
+            ["2011",22618,8421,0,0,17248,0,0,0,5388,63294,0],
+            ["2020",25288,8724,11758,36344,18549,10287,5582,1328,5636,66098,79914],
+            ["2050",33959,9360,13139,41896,20205,9457,5621,1250,6090,72341,69412]
+        ]);        
+        // グラフのオプションを記述（タイトルと幅と高さ）
+        var options = {'title':'Population levels',
+                        'width':'100%',
+                        'height':500,
+                        "pointSize":4
+                       };
+        // グラフの描画
+        var chart = new google.visualization.LineChart(document.getElementById('chart'));
+        chart.draw(data, options);
+         
+         
+         
+         
+        var data = google.visualization.arrayToDataTable([
+            ["Australia",12],
+            ["Austria",3],
+            ["Belgium",4],
+            ["Canada",14],
+            ["Chile",7],
+            ["Czech Republic",3],
+            ["Denmark",1],
+            ["Estonia",0],
+            ["Finland",2],
+            ["France",25],
+            ["Germany",24],
+            ["other",64]
+        ]);        
+        // グラフのオプションを記述（タイトルと幅と高さ）
+        var options = {'title':'Population levels ratio 2050',
+                        'width':'100%',
+                        'height':500,
+                        animation:{
+                            duration: 1000,
+                            easing: 'out',
+                          }                       
+                       };
+        // グラフの描画
+        var chart = new google.visualization.PieChart(document.getElementById('chart2'));
+        chart.draw(data, options);
+         
+         
+    }
+</script>
+
+
+<script type="text/javascript">
+// Google Analytics設定
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', '自分のトラッキングコード']);
+
+$(document).bind('mobileinit', function(){
+	// 日本語化
+	$.mobile.loadingMessage = '読込み中';
+	$.mobile.pageLoadErrorMessage = '読込みに失敗しました';
+	$.mobile.page.prototype.options.backBtnText = '戻る';
+	$.mobile.dialog.prototype.options.closeBtnText = '閉じる';
+	$.mobile.selectmenu.prototype.options.closeText= '閉じる';
+	$.mobile.listview.prototype.options.filterPlaceholder = '検索文字列...';
+
+	// 戻るボタンの自動表示
+	$.mobile.page.prototype.options.addBackBtn = true;				
+
+	// ページトラッキング
+	$(':jqmData(role="page")').live('pageshow', function (event, ui) {
+		_gaq.push(['_trackPageview', $.mobile.activePage.jqmData('url')]);
+	});
+});
+
+$(document).ready(function(){
+	// 最初のページ以外の全ページにホームボタンを追加
+	$(':jqmData(role=page)').live("pagebeforecreate", function(evt){
+		var page = $(this),
+			home = $.mobile.firstPage;
+			if ( page.attr('id') != home.attr('id') ) {
+				page.find(':jqmData(role="header")').append(
+					$('<a href="#' + home.attr('id') + '" data-transition="slideup" data-role="button" data-icon="home" data-iconpos="notext" class="ui-btn-right">ホームへ</a>')
+			);
+		}
+	});
+	
+});
+
+</script>
+<script src="http://code.jquery.com/mobile/1.0rc1/jquery.mobile-1.0rc1.min.js"></script>
+</head>
+<body>
+
+<!--///////トップページ///////-->
+<div data-role="page" id="top">
+
+    <div data-role="header" class="toppage">
+        <h1>OECD mobile</h1>
+    </div>
+    
+    <div data-role="content">
+        <div data-role="controlgroup">
+            <img src="images/sample.png" class="wide" />
+            <a href="#menu1" data-role="button" data-icon="arrow-r" data-iconpos="right">Total population</a>
+            <a href="#menu2" data-role="button" data-icon="arrow-r" data-iconpos="right">Total population 2050</a>
+            <a href="#menu3" data-role="button" data-icon="arrow-r" data-iconpos="right">説明</a>
+            <a href="#menu5" data-role="button" data-icon="arrow-r" data-iconpos="right">お問い合わせ</a>
+        </div>
+    </div>
+    
+    <div data-role="footer">
+        <div data-role="navbar">
+            <ul>
+            <li><a href="./index.html" data-icon="arrow-u" target="_blank">トップへ</a></li>
+            <li><a href="#menu3" data-icon="info" data-transition="slideup">設定</a></li>
+            <li><a href="#menu5" data-icon="star" data-transition="pop">お問い合わせ</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--///////トップページ///////-->
+
+
+<!--///////コンテンツ1///////-->
+<div data-role="page" id="menu1">
+    <div data-role="header">
+        <h1>Total population</h1>
+    </div>
+        
+    <div data-role="content">
+        <img src="images/sample_s.png" class="wide" />
+        
+        
+        <div id="chart"></div>
+        <div data-role="footer">
+            <div data-role="navbar">
+                <ul>
+                <li><a href="./index.html" data-icon="arrow-u" target="_blank">トップへ</a></li>
+                <li><a href="#menu3" data-icon="info" data-transition="slideup">会社情報</a></li>
+                <li><a href="#menu5" data-icon="star" data-transition="pop">お問い合わせ</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--///////コンテンツ1///////-->
+
+<!--///////コンテンツ2///////-->
+<div data-role="page" id="menu2">
+    <div data-role="header">
+        <h1>コンテンツ2</h1>
+    </div>
+    
+    <div data-role="content">
+        <img src="images/sample_s.png" class="wide" />
+        
+        
+        <div id="chart2"></div>
+        <div data-role="footer">
+            <div data-role="navbar">
+                <ul>
+                <li><a href="./index.html" data-icon="arrow-u" target="_blank">トップへ</a></li>
+                <li><a href="#menu3" data-icon="info" data-transition="slideup">会社情報</a></li>
+                <li><a href="#menu5" data-icon="star" data-transition="pop">お問い合わせ</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--///////コンテンツ2///////-->
+
+<!--///////コンテンツ3///////-->
+<div data-role="page" id="menu3">
+    <div data-role="header">
+        <h1>説明</h1>
+    </div>
+    
+    <div data-role="content">
+        <img src="images/sample_s.png" class="wide" />
+        <div class="ui-grid-b">
+            <div class="ui-block-a"><div class=" ui-bar ui-bar-c">このアプリはサンプルです</div></div>
+            <div class="ui-block-b"><div class=" ui-bar ui-bar-c">本制作では、他にも様々なグラフ表示が可能です</div></div>
+            <div class="ui-block-c"><div class=" ui-bar ui-bar-c">スマートフォンに最適化致します</div></div>
+        </div>
+    </div>
+    
+    <div data-role="footer">
+        <div data-role="navbar">
+            <ul>
+            <li><a href="./index.html" data-icon="arrow-u" target="_blank">トップへ</a></li>
+            <li><a href="#menu3" data-icon="info" data-transition="slideup">情報</a></li>
+            <li><a href="#menu5" data-icon="star" data-transition="pop">お問い合わせ</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--///////コンテンツ3///////-->
+
+
+<!--///////お問い合わせ///////-->
+<div data-role="page" id="menu5">
+    <div data-role="header">
+        <h1>サンプルです</h1>
+    </div>
+    
+    <form action="#" method="post">
+        <div data-role="content">
+            <div data-role="fieldcontain">
+                <label for="name">名前</label>
+                <input type="text" id="name">
+            </div>
+            <div data-role="fieldcontain">
+                <label for="gender">性別</label>
+                <select name="gender" id="gender" data-role="slider">
+                    <option value="男性">男性</option>
+                    <option value="女性">女性</option>
+                </select>
+            </div>
+            <div data-role="fieldcontain">
+                <fieldset data-role="controlgroup">
+                    <legend>お問い合わせ種別</legend>
+                    <input type="checkbox" name="type1" id="type1" value="HP新規作成">
+                    <label for="type1">アプリ内容について</label>
+                    <input type="checkbox" name="type2" id="type2" value="HPリニューアル">
+                    <label for="type2">不具合について</label>
+                    <input type="checkbox" name="type3" id="type3" value="システム開発">
+                    <label for="type3">データ内容について</label>
+                </fieldset>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="comment">お問い合わせ内容詳細</label>
+                <textarea id="comment"></textarea>
+            </div>
+            <div data-role="fieldcontain">
+                <fieldset data-role="controlgroup">
+                    <legend>希望時期</legend>
+                    <input type="radio" name="choice" id="choice1" value="1ヶ月以内" checked="checked" />
+                    <label for="choice1">1ヶ月以内</label>
+                    <input type="radio" name="choice" id="choice2" value="1～3ヶ月以内" />
+                    <label for="choice2">1～3ヶ月以内</label>
+                    <input type="radio" name="choice" id="choice3" value="3ヶ月以降" />
+                    <label for="choice3">3ヶ月以降</label>
+                </fieldset>
+            </div>
+            <input type="button" value="キャンセル" data-icon="delete" data-inline="true">
+            <input type="submit" value="送信" data-icon="arrow-r" data-inline="true">
+        </div>
+    </form>
+    
+    <div data-role="footer">
+        <div data-role="navbar">
+            <ul>
+            <li><a href="./index.html" data-icon="arrow-u" target="_blank">トップへ</a></li>
+            <li><a href="#menu3" data-icon="info" data-transition="slideup">概要</a></li>
+            <li><a href="#menu5" data-icon="star" data-transition="pop">お問い合わせ</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--///////お問い合わせ///////-->
+
+</body>
+</html>

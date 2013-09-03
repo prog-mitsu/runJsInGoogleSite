@@ -1,0 +1,40 @@
+@charset "utf-8";
+* {
+  font-family: "メイリオ","Meiryo",verdana,"ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro",Osaka,"ＭＳ Ｐゴシック","MS PGothic",Sans-Serif;
+}
+.wide {
+  width: 100%;
+}
+.bold {
+  font-weight: bold;
+}
+.ui-content{
+  background-color: white;
+}
+
+/* テキストを省略せずに表示する */
+.ui-header .ui-title,.ui-footer .ui-title,.ui-btn-inner,.ui-li-heading,.ui-li .ui-btn-text a.ui-link-inherit,.ui-li-desc {
+  overflow: visible;
+  white-space: normal;
+}
+#map {
+  width: 100%;
+  height: 300px;
+  border: 8px solid #ccc;
+  -webkit-box-sizing: border-box; 
+  box-sizing: border-box;
+}
+
+/*入力フォームの背景を調整*/
+textarea.ui-body-b,input.ui-body-b {
+  background-color: white;
+}
+/*見出しとフォーム部品の間の余白を調整*/
+.ui-field-contain:first-child {
+  padding-top: 0;
+}
+
+.chart {
+    width: 500px;
+    height: 500px;
+}
